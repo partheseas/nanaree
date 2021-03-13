@@ -10,14 +10,14 @@ int APIENTRY wWinMain(
 	_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR lpCmdLine,
-	_In_ int nCmdShow
-) {
+	_In_ int nCmdShow) {
 	// LoadStringW(hInstance, IDC_APP_TITLE, szTitle, MAX_PATH);
 	// LoadStringW(hInstance, IDC_WINDOWSPROJECT1, szWindowClass, MAX_PATH);
 
-	// HACCEL hAccelTable = LoadAcceleratorsW(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT1));
+	// HACCEL hAccelTable = LoadAcceleratorsW(hInstance,
+	// MAKEINTRESOURCE(IDC_WINDOWSPROJECT1));
 
-	WNDCLASSEXW wcex = { sizeof(WNDCLASSEXW) };
+	WNDCLASSEXW wcex = {sizeof(WNDCLASSEXW)};
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc = WndProc;
 	wcex.cbClsExtra = 0;
@@ -35,7 +35,7 @@ int APIENTRY wWinMain(
 	if (RegisterClassExW(&wcex) == 0) return FALSE;
 
 	hInst = hInstance;
-	
+
 	HWND hwnd = CreateWindowW(
 		szWindowClass,
 		szTitle,
@@ -47,8 +47,7 @@ int APIENTRY wWinMain(
 		NULL,
 		NULL,
 		hInstance,
-		NULL
-	);
+		NULL);
 
 	if (!hwnd) return FALSE;
 
@@ -59,79 +58,63 @@ int APIENTRY wWinMain(
 	MSG msg;
 	while (GetMessageW(&msg, NULL, 0, 0)) {
 		// if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 		// }
 	}
 
-	return (int) msg.wParam;
+	return (int)msg.wParam;
 }
 
-LRESULT CALLBACK WndProc(
-	HWND hWnd,
-	UINT message,
-	WPARAM wParam,
-	LPARAM lParam
-) {
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	switch (message) {
-		case WM_COMMAND:
-			int wmId = LOWORD(wParam);
+	case WM_COMMAND:
+		int wmId = LOWORD(wParam);
 
-			switch (wmId) {
-				case IDM_ABOUT:
-					DialogBoxW(hInst, L"About Puppy", hWnd, About);
-					break;
-				case IDM_EXIT:
-					DestroyWindow(hWnd);
-					break;
-				default:
-					return DefWindowProcW(hWnd, message, wParam, lParam);
-			}
+		switch (wmId) {
+		case IDM_ABOUT:
+			DialogBoxW(hInst, L"About Puppy", hWnd, About);
 			break;
-
-		case WM_PAINT:
-			PAINTSTRUCT ps;
-			RECT rect;
-			HDC hdc = BeginPaint(hWnd, &ps);
-
-			GetClientRect(hWnd, &rect);
-			DrawTextW(
-				hdc,
-				L"Hi puppy!",
-				-1,
-				&rect,
-				DT_SINGLELINE | DT_CENTER | DT_VCENTER
-			);
-			EndPaint(hWnd, &ps);
+		case IDM_EXIT:
+			DestroyWindow(hWnd);
 			break;
-
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			break;
-		
 		default:
 			return DefWindowProcW(hWnd, message, wParam, lParam);
+		}
+		break;
+
+	case WM_PAINT:
+		PAINTSTRUCT ps;
+		RECT rect;
+		HDC hdc = BeginPaint(hWnd, &ps);
+
+		GetClientRect(hWnd, &rect);
+		DrawTextW(hdc, L"Hi puppy!", -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+		EndPaint(hWnd, &ps);
+		break;
+
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+
+	default:
+		return DefWindowProcW(hWnd, message, wParam, lParam);
 	}
 
 	return 0;
 }
 
-INT_PTR CALLBACK About(
-	HWND hDlg,
-	UINT message,
-	WPARAM wParam,
-	LPARAM lParam
-) {
+INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	switch (message) {
-		case WM_INITDIALOG:
-			return TRUE;
+	case WM_INITDIALOG:
+		return TRUE;
 
-		case WM_COMMAND:
-			if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) {
-				EndDialog(hDlg, LOWORD(wParam));
-				return TRUE;
-			}
-			break;
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) {
+			EndDialog(hDlg, LOWORD(wParam));
+			return TRUE;
+		}
+		break;
 	}
 
 	return FALSE;
