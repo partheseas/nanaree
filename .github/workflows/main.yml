@@ -1,0 +1,19 @@
+name: main
+
+on:
+    push:
+        branches: [$default-branch]
+    pull_request:
+        branches: [$default-branch]
+
+jobs:
+    build:
+        runs-on: windows-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            # - run: clang-format -i src/*.{c,h}
+            # - run: git diff --name-only --exit-code
+
+            - run: ./build.bat

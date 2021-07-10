@@ -63,7 +63,7 @@ int APIENTRY wWinMain(
 		// }
 	}
 
-	return (int)msg.wParam;
+	return (int) msg.wParam;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
