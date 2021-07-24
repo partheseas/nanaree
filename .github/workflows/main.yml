@@ -16,6 +16,6 @@ jobs:
             # - run: clang-format -i src/*.{c,h}
             # - run: git diff --name-only --exit-code
             # - run: echo "::add-path::C:\msys64\mingw64\bin"
-            - run: echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+            # - run: echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
             # - run: ./build.bat
-            - run: clang -target x86_64-pc-windows-gnu "src\main.c" -o "target\nanaree.exe" -z "/SUBSYSTEM:WINDOWS" "-Wl,user32.lib,kernel32.lib,shell32.lib"
+            # - run: clang -target x86_64-pc-windows-gnu "src\main.c" -o "target\nanaree.exe" -z "/SUBSYSTEM:WINDOWS" "-Wl,user32.lib,kernel32.lib,shell32.lib"
