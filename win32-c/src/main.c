@@ -24,13 +24,13 @@ int APIENTRY wWinMain(
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = hInstance;
 	// wcex.hIcon = LoadIconW(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT1));
-	wcex.hIcon = LoadIconW(hInstance, L"visualstudio/Nonoree.ico");
+	wcex.hIcon = LoadIconW(hInstance, L"./resources/Nonoree.ico");
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	// wcex.lpszMenuName = MAKEINTRESOURCE(IDC_WINDOWSPROJECT1);
 	wcex.lpszClassName = szWindowClass;
 	// wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDC_SMALL));
-	wcex.hIconSm = LoadIconW(wcex.hInstance, L"visualstudio/small.ico");
+	wcex.hIconSm = LoadIconW(hInstance, L"./resources/small.ico");
 
 	if (RegisterClassExW(&wcex) == 0) return FALSE;
 
